@@ -13,26 +13,28 @@ FakePoseGenerator fpg;
 void initializeGL()
 {
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+
+    glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	mat4x4 view;
+	vec3 eye = {0.0f, 0.0f, 0.0f};
+	vec3 center = {0.0f, 0.0f, 1.0f};
+	vec3 up = {0.0f, 1.0f, 0.0f};
+	mat4x4_look_at(view, eye, center, up);
+	glLoadMatrixf((const GLfloat*)view);
 }
 
 void resizeGL(int width, int height)
 {
 	glViewport(0, 0, width, height);
 	
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	mat4x4 projection, view;
+	glMatrixMode(GL_PROJECTION); // Select The Projection Matrix
+	glLoadIdentity();            // Reset The Projection Matrix
+	mat4x4 projection;
 	float aspect = width / float(height);
 	mat4x4_perspective(projection, 45.0f, aspect, 0.1f, 100.0f);
 	glLoadMatrixf((const GLfloat*)projection);
-
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	vec3 eye = {0.0f, 0.0f, 0.0f};
-	vec3 center = {0.0f, 0.0f, 1.0f};
-	vec3 up = {0.0f, 1.0f, 0.0f};
-	mat4x4_look_at(view, eye, center, up);
-	glLoadMatrixf((const GLfloat*)view);
 }
 
 void paintGL()
