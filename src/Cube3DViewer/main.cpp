@@ -4,11 +4,13 @@
 #include "linmath.h"
 #include "GLUtil.h"
 #include "FakePoseGenerator.h"
+#include "SocketPoseService.h"
 
 float pos[3] = {0.0, 0.0, 0.0};
 float rot[3] = {0.0, 0.0, 0.0};
 
 FakePoseGenerator fpg;
+SocketPoseService sps;
 
 void initializeGL()
 {
@@ -48,6 +50,7 @@ void paintGL()
 
 	// update pose
 	fpg.getPose(pos);
+	sps.getPose(pos);
 	glTranslated(pos[0], pos[1], pos[2]);
 	glRotated(rot[1], 0.0, 1.0, 0.0);
 	glRotated(rot[0], 1.0, 0.0, 0.0);
