@@ -11,10 +11,11 @@ void sendPoseFromFakePoseGenerator()
 {
 	SocketPoseClient spc;
 	float pos[3] = {0.0, 0.0, 2.0};
+	float rot[3] = {0.0, 0.0, 0.0};
 
 	for (int i = 0; i < 20; i++) {
 		pos[2] += 0.3;
-		spc.sendPose(pos);
+		spc.sendPose(pos, rot);
 		usleep(1000*100);
 	}
 }
@@ -27,6 +28,7 @@ void sendPoseFromFile(const char *filename)
 	FILE *fp = NULL;
 	int ret;
 	float pos[3];
+	float rot[3];
 
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
@@ -35,11 +37,11 @@ void sendPoseFromFile(const char *filename)
 	}
 
 	while (1) {
-		ret = fscanf(fp, "%f, %f, %f", &pos[0], &pos[1], &pos[2]);
+		ret = fscanf(fp, "%f, %f, %f, %f, %f, %f", &pos[0], &pos[1], &pos[2], &rot[0], &rot[1], &rot[2]);
 		if (ret == EOF)
 			break;
 
-		spc.sendPose(pos, true);
+		spc.sendPose(pos, rot, true);
 		usleep(1000*50);
 	}
 
@@ -55,7 +57,7 @@ int main(int argc, char* argv[])
     }*/
 
 	//sendPoseFromFakePoseGenerator();
-	sendPoseFromFile("pose.log");
+	sendPoseFromFile(argv[1]);
 
 	printf("end of process.\n");
 

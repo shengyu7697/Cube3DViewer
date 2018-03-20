@@ -9,7 +9,7 @@
 float pos[3] = {0.0, 0.0, 0.0};
 float rot[3] = {0.0, 0.0, 0.0};
 
-FakePoseGenerator fpg;
+//FakePoseGenerator fpg;
 SocketPoseService sps;
 
 void initializeGL()
@@ -49,12 +49,13 @@ void paintGL()
 	glPushMatrix();
 
 	// update pose
-	fpg.getPose(pos);
-	sps.getPose(pos);
+	//fpg.getPose(pos, rot);
+	sps.getPose(pos, rot);
 	glTranslated(pos[0], pos[1], pos[2]);
 	glRotated(rot[1], 0.0, 1.0, 0.0);
 	glRotated(rot[0], 1.0, 0.0, 0.0);
 	glRotated(rot[2], 0.0, 0.0, 1.0);
+	//printf("%f, %f, %f, %f, %f, %f\n", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
 
 	//glLineWidth(2.5);
 	//GLUtil::drawAxis(1.0);

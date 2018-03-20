@@ -14,18 +14,35 @@ FakePoseGenerator::~FakePoseGenerator()
 		mThread.join();
 }
 
+inline void opencv2opengl(float pos[3], float euler[3])
+{
+	pos[0] = -pos[0];
+	pos[1] = -pos[1];
+	//pos[2] = pos[2];
+	euler[0] = -euler[0];
+	euler[1] = -euler[1];
+	euler[2] = -euler[2];
+}
+
 void FakePoseGenerator::run()
 {
-	poseFromGenerator();
-	//poseFromFile("pose.log");
+	//poseFromGenerator();
+	poseFromFile("pose1.log");
 }
 
 void FakePoseGenerator::poseFromGenerator()
 {
-	for (int i = 0; i < 20; i++) {
-		mPos[0] = 0;
-		mPos[1] = 0;
-		mPos[2] += 0.3;
+	mPos[0] = 0;
+	mPos[1] = 0;
+	mPos[2] = 0;
+	mRot[0] = 0;
+	mRot[1] = 0;
+	mRot[2] = 0;
+
+	for (int i = 0; i < 100; i++) {
+		if (mPos[2] <= 6.0)
+			mPos[2] += 0.3;
+		mRot[1] += 15;
 		usleep(1000*100);
 	}
 }
@@ -36,35 +53,34 @@ void FakePoseGenerator::poseFromFile(const char *filename)
 	FILE *fp = NULL;
 	int ret;
 	float pos[3];
+	float rot[3];
 	float scale = 100.0;
 
 	fp = fopen(filename, "r");
 	while (1) {
-		ret = fscanf(fp, "%f, %f, %f", &pos[0], &pos[1], &pos[2]);
+		ret = fscanf(fp, "%f, %f, %f, %f, %f, %f", &pos[0], &pos[1], &pos[2], &rot[0], &rot[1], &rot[2]);
 		if (ret == EOF)
 			break;
 		usleep(1000*50);
 
-		opencv2opengl(pos);
+		opencv2opengl(pos, rot);
 		mPos[0] = pos[0] * scale;
 		mPos[1] = pos[1] * scale;
 		mPos[2] = pos[2] * scale;
-		printf("%f, %f, %f\n", mPos[0], mPos[1], mPos[2]);
+		mRot[0] = rot[0];
+		mRot[1] = rot[1];
+		mRot[2] = rot[2];
 	}
 	if (fp != NULL)
 		fclose(fp);
 }
 
-void FakePoseGenerator::opencv2opengl(float pos[])
-{
-	pos[0] = -pos[0];
-	pos[1] = -pos[1];
-	pos[2] = pos[2];
-}
-
-void FakePoseGenerator::getPose(float pos[])
+void FakePoseGenerator::getPose(float pos[3], float rot[3])
 {
 	pos[0] = mPos[0];
 	pos[1] = mPos[1];
 	pos[2] = mPos[2];
+	rot[0] = mRot[0];
+	rot[1] = mRot[1];
+	rot[2] = mRot[2];
 }

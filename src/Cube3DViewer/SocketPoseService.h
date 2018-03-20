@@ -10,7 +10,7 @@ public:
 	SocketPoseService();
 	~SocketPoseService();
 
-	void getPose(float pos[]);
+	void getPose(float pos[3], float rot[3]);
 
 private:
 	void onConnect2(int session);
@@ -18,6 +18,7 @@ private:
 	void onRecv2(int session, const char *buf, int len);
 
 	float mPos[3] = {0.0, 0.0, 0.0};
+	float mRot[3] = {0.0, 0.0, 0.0};
 	TinyTcpServer mServer;
 
 	OnConnect onConnect = nullptr;
