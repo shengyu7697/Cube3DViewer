@@ -1,0 +1,3 @@
+[submodule "thirdparty/TinyTcp"]
+	path = thirdparty/TinyTcp
+	url = https://github.com/shengyu7697/TinyTcp.git
