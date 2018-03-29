@@ -58,7 +58,7 @@ void paintGL()
 	//printf("%f, %f, %f, %f, %f, %f\n", pos[0], pos[1], pos[2], rot[0], rot[1], rot[2]);
 
 	//glLineWidth(2.5);
-	//GLUtil::drawAxis(1.0);
+	GLUtil::drawAxis(5.0);
 	GLUtil::drawCube();
 
 	glPopMatrix();
