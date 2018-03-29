@@ -5,9 +5,9 @@ add_executable(cube3dviewer
     GLUtil.cpp
     FakePoseGenerator.cpp
     SocketPoseService.cpp
-    ../TinyTcp/TinyTcpServer.cpp
-    ../TinyTcp/SocketUtil.cpp
+    ../../thirdparty/TinyTcp/src/TinyTcp/TinyTcpServer.cpp
+    ../../thirdparty/TinyTcp/src/TinyTcp/SocketUtil.cpp
 )
 
-target_include_directories(cube3dviewer PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../TinyTcp")
+target_include_directories(cube3dviewer PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../thirdparty/TinyTcp/src/TinyTcp")
 target_link_libraries(cube3dviewer GL GLEW glfw)
