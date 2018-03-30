@@ -27,5 +27,16 @@ Windows, Mac OS, Linux
 * GLEW
 * GLFW
 
+### Install GLEW
+```
+sudo apt-get install libglew-dev
+```
+
+### Install GLFW
+```
+git clone https://github.com/glfw/glfw
+cd glfw && mkdir build && cd build && sudo make install
+```
+
 ## License
 Cube3DViewer is published under the MIT license.  
