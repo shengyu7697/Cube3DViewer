@@ -26,8 +26,8 @@ inline void opencv2opengl(float pos[3], float euler[3])
 
 void FakePoseGenerator::run()
 {
-	//poseFromGenerator();
-	poseFromFile("pose1.log");
+	poseFromGenerator();
+	//poseFromFile("pose1.log");
 }
 
 void FakePoseGenerator::poseFromGenerator()
@@ -39,10 +39,15 @@ void FakePoseGenerator::poseFromGenerator()
 	mRot[1] = 0;
 	mRot[2] = 0;
 
-	for (int i = 0; i < 100; i++) {
-		if (mPos[2] <= 6.0)
+	for (int i = 0; i < 50; i++) {
+		if (mPos[2] <= 10.0f) // z axis
 			mPos[2] += 0.3;
-		mRot[1] += 15;
+		usleep(1000*100);
+	}
+
+	for (int i = 0; i < 100; i++) {
+		if (mRot[1] <= 175.0f) // y axis
+			mRot[1] += 2.5;
 		usleep(1000*100);
 	}
 }
