@@ -2,6 +2,8 @@ Cube3DViewer
 ============
 This is a program that show the position and orientation of cube in 3D scene.  
 
+![screenshot](https://raw.github.com/shengyu7697/Cube3DViewer/master/screenshot/screenshot.png)  
+
 ## Features
 * Render position and orientation.
 * Receive pose from generator.
