@@ -97,6 +97,9 @@ int main(int argc, const char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+	// Move window to (100, 100)
+	glfwSetWindowPos(window, 100, 100);
+
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 	glfwSetKeyCallback(window, keyCallback);
