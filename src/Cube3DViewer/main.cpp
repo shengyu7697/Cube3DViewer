@@ -1,16 +1,23 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "linmath.h"
 #include "GLUtil.h"
-#include "FakePoseGenerator.h"
+#if defined(USE_NETWORK_SOCKET)
 #include "SocketPoseService.h"
+#else
+#include "FakePoseGenerator.h"
+#endif
 
 float pos[3] = {0.0, 0.0, 0.0};
 float rot[3] = {0.0, 0.0, 0.0};
 
-//FakePoseGenerator fpg;
+#if defined(USE_NETWORK_SOCKET)
 SocketPoseService sps;
+#else
+FakePoseGenerator fpg;
+#endif
 
 void initializeGL()
 {
@@ -49,8 +56,12 @@ void paintGL()
 	glPushMatrix();
 
 	// update pose
-	//fpg.getPose(pos, rot);
+#if defined(USE_NETWORK_SOCKET)
 	sps.getPose(pos, rot);
+#else
+	fpg.getPose(pos, rot);
+#endif
+
 	glTranslated(pos[0], pos[1], pos[2]);
 	glRotated(rot[1], 0.0, 1.0, 0.0);
 	glRotated(rot[0], 1.0, 0.0, 0.0);
