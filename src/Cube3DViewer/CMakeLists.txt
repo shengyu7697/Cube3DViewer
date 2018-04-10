@@ -30,4 +30,4 @@ endif()
 add_executable(cube3dviewer ${FILES})
 
 target_include_directories(cube3dviewer PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../thirdparty/TinyTcp/src/TinyTcp" ${INCLUDE_DIRS})
-target_link_libraries(cube3dviewer GL GLEW glfw ${LIBRARIES})
+target_link_libraries(cube3dviewer GL GLEW glfw pthread ${LIBRARIES})
