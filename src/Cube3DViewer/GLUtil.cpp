@@ -67,23 +67,23 @@ void drawCube()
 
 void drawAxis(float len)
 {
-	glBegin(GL_LINES);
-	// x axis
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(len, 0.0, 0.0);
+    glBegin(GL_LINES);
+    // x axis
+    glColor3f(1.0, 0.0, 0.0);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(len, 0.0, 0.0);
 
-	// y axis
-	glColor3f(0.0, 1.0, 0.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.0, len, 0.0);
+    // y axis
+    glColor3f(0.0, 1.0, 0.0);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(0.0, len, 0.0);
 
-	// z axis
-	glColor3f(0.0, 0.0, 1.0);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.0, 0.0, len);
+    // z axis
+    glColor3f(0.0, 0.0, 1.0);
+    glVertex3f(0.0, 0.0, 0.0);
+    glVertex3f(0.0, 0.0, len);
 
-	glEnd();
+    glEnd();
 }
 
 } // namespace GLUtil
