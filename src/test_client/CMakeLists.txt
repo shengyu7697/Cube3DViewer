@@ -1,5 +1,6 @@
 add_executable(test_client
     client.cpp
+    SocketPoseClient.h
     SocketPoseClient.cpp
 )
 
