@@ -22,5 +22,6 @@ endif()
 add_subdirectory(src/Cube3DViewer)
 
 if(USE_NETWORK_SOCKET)
+    add_subdirectory(thirdparty/TinyTcp/src/TinyTcp/)
     add_subdirectory(src/test_client)
 endif()

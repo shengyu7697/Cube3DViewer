@@ -6,17 +6,11 @@ set(FILES
 )
 
 if(USE_NETWORK_SOCKET)
-    list(APPEND FILES
-        SocketPoseService.cpp
-        ../../thirdparty/TinyTcp/src/TinyTcp/TinyTcpServer.cpp
-        ../../thirdparty/TinyTcp/src/TinyTcp/SocketUtil.cpp
-    )
-    list(APPEND INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/../../thirdparty/TinyTcp/src/TinyTcp")
-
+    list(APPEND FILES SocketPoseService.cpp)
+    list(APPEND INCLUDE_DIRS tinytcp)
+    list(APPEND LIBRARIES tinytcp)
 else()
-    list(APPEND FILES
-        FakePoseGenerator.cpp
-    )
+    list(APPEND FILES FakePoseGenerator.cpp)
 endif()
 
 if(USE_PROTOBUF)
@@ -29,5 +23,5 @@ endif()
 
 add_executable(cube3dviewer ${FILES})
 
-target_include_directories(cube3dviewer PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../../thirdparty/TinyTcp/src/TinyTcp" ${INCLUDE_DIRS})
+target_include_directories(cube3dviewer PUBLIC ${INCLUDE_DIRS})
 target_link_libraries(cube3dviewer GL GLEW glfw pthread ${LIBRARIES})
