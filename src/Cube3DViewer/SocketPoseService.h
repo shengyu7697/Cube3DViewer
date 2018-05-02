@@ -25,7 +25,7 @@ private:
 
     float mPos[3] = { 0.0, 0.0, 0.0 };
     float mRot[3] = { 0.0, 0.0, 0.0 };
-    TinyTcpServer mServer;
+    TinyTcpServer mTcpServer;
     TinyUdpServer mUdpServer;
 
     OnConnect onConnectCB = nullptr;

@@ -10,12 +10,12 @@ using namespace vr;
 SocketPoseService::SocketPoseService()
 {
     onConnectCB = std::bind(&SocketPoseService::onConnect, this, std::placeholders::_1);
-    mServer.setOnConnect(onConnectCB);
+    mTcpServer.setOnConnect(onConnectCB);
     onDisconnectCB = std::bind(&SocketPoseService::onDisconnect, this, std::placeholders::_1);
-    mServer.setOnDisconnect(onDisconnectCB);
+    mTcpServer.setOnDisconnect(onDisconnectCB);
     onRecvCB = std::bind(&SocketPoseService::onRecv, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-    mServer.setOnRecv(onRecvCB);
-    mServer.start(7000, 5);
+    mTcpServer.setOnRecv(onRecvCB);
+    mTcpServer.start(7000, 5);
     onUdpRecvCB = std::bind(&SocketPoseService::onUdpRecv, this, std::placeholders::_1, std::placeholders::_2);
     mUdpServer.setOnRecv(onUdpRecvCB);
     mUdpServer.start(7000+1);
