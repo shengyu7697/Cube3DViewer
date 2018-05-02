@@ -6,6 +6,9 @@
 
 class SocketPoseClient
 {
+    typedef std::function<void(int session)> OnConnect;
+    typedef std::function<void(int session)> OnDisconnect;
+    typedef std::function<void(int session, const char *buf, int len)> OnRecv;
 public:
 	SocketPoseClient();
 	~SocketPoseClient();

@@ -16,6 +16,9 @@ SocketPoseService::SocketPoseService()
     onRecvCB = std::bind(&SocketPoseService::onRecv, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
     mServer.setOnRecv(onRecvCB);
     mServer.start(7000, 5);
+    onUdpRecvCB = std::bind(&SocketPoseService::onUdpRecv, this, std::placeholders::_1, std::placeholders::_2);
+    mUdpServer.setOnRecv(onUdpRecvCB);
+    mUdpServer.start(7000+1);
 }
 
 SocketPoseService::~SocketPoseService()
@@ -69,4 +72,9 @@ void SocketPoseService::onRecv(int session, const char *buf, int len)
     mRot[1] = euler[1];
     mRot[2] = euler[2];
 #endif
+}
+
+void SocketPoseService::onUdpRecv(const char *buf, int len)
+{
+    printf("onUdpRecv\n");
 }
