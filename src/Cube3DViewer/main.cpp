@@ -10,8 +10,8 @@
 #include <GLFW/glfw3.h>
 #include "linmath.h"
 
-float pos[3] = {0.0, 0.0, 0.0};
-float rot[3] = {0.0, 0.0, 0.0};
+float pos[3] = {0.0f, 0.0f, 0.0f};
+float rot[3] = {0.0f, 0.0f, 0.0f};
 
 #if defined(USE_NETWORK_SOCKET)
 SocketPoseService sps;
