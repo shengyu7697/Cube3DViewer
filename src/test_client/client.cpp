@@ -10,11 +10,11 @@ using namespace std;
 void sendPoseFromFakePoseGenerator()
 {
 	SocketPoseClient spc;
-	float pos[3] = {0.0, 0.0, 2.0};
-	float rot[3] = {0.0, 0.0, 0.0};
+	float pos[3] = {0.0f, 0.0f, 2.0f};
+	float rot[3] = {0.0f, 0.0f, 0.0f};
 
 	for (int i = 0; i < 20; i++) {
-		pos[2] += 0.3;
+		pos[2] += 0.3f;
 		spc.sendPose(pos, rot);
 		usleep(1000*100);
 	}
@@ -56,8 +56,8 @@ int main(int argc, char* argv[])
         exit(1);
     }*/
 
-	//sendPoseFromFakePoseGenerator();
-	sendPoseFromFile(argv[1]);
+	sendPoseFromFakePoseGenerator();
+	//sendPoseFromFile(argv[1]);
 
 	printf("end of process.\n");
 

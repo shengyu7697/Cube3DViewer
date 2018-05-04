@@ -23,8 +23,8 @@ private:
     void onRecv(int session, const char *buf, int len);
     void onUdpRecv(const char *buf, int len);
 
-    float mPos[3] = { 0.0, 0.0, 0.0 };
-    float mRot[3] = { 0.0, 0.0, 0.0 };
+    float mPos[3] = { 0.0f, 0.0f, 0.0f };
+    float mRot[3] = { 0.0f, 0.0f, 0.0f };
     TinyTcpServer mTcpServer;
     TinyUdpServer mUdpServer;
 

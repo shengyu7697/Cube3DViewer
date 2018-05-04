@@ -20,8 +20,8 @@ private:
 	void onDisconnect(int session);
 	void onRecv(int session, const char *buf, int len);
 
-	float mPos[3] = {0.0, 0.0, 0.0};
-	TinyTcpClient mClient;
+	float mPos[3] = {0.0f, 0.0f, 0.0f};
+	TinyTcpClient mTcpClient;
 
 	OnConnect onConnectCB = nullptr;
 	OnDisconnect onDisconnectCB = nullptr;
