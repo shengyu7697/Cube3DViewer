@@ -1,7 +1,8 @@
 #include "FakePoseGenerator.h"
 
 #include <stdio.h>
-#include <unistd.h>
+
+void sleep_ms(int milliseconds);
 
 FakePoseGenerator::FakePoseGenerator()
 {
@@ -43,14 +44,14 @@ void FakePoseGenerator::poseFromGenerator()
     {
         if (mPos[2] <= 10.0f) // z axis
             mPos[2] += 0.3f;
-        usleep(1000 * 100);
+        sleep_ms(100);
     }
 
     for (int i = 0; i < 100; i++)
     {
         if (mRot[1] <= 175.0f) // y axis
             mRot[1] += 2.5f;
-        usleep(1000 * 100);
+        sleep_ms(100);
     }
 }
 
@@ -69,7 +70,7 @@ void FakePoseGenerator::poseFromFile(const char *filename)
                 &rot[0], &rot[1], &rot[2]);
         if (ret == EOF)
             break;
-        usleep(1000 * 50);
+        sleep_ms(50);
 
         opencv2opengl(pos, rot);
         mPos[0] = pos[0] * scale;
@@ -92,3 +93,29 @@ void FakePoseGenerator::getPose(float pos[3], float rot[3])
     rot[1] = mRot[1];
     rot[2] = mRot[2];
 }
+
+// --- TimeUtil ---
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <time.h>
+#define MILLISECONDS_TO_NANOSECONDS 1000000
+#endif
+
+/*
+nanosecond   (ns) = 0.000000001 sec = 1e-9 sec
+microseconds (μs) = 0.000001 sec    = 1e-6 sec
+milliseconds (ms) = 0.001 sec       = 1e-3 sec
+*/
+void sleep_ms(int milliseconds)
+{
+#ifdef _WIN32
+    Sleep(milliseconds);
+#else
+    struct timespec req = { 0 };
+    req.tv_sec = 0;
+    req.tv_nsec = milliseconds * MILLISECONDS_TO_NANOSECONDS;
+    nanosleep(&req, (struct timespec *)NULL);
+#endif
+}
+// --- TimeUtil ---
