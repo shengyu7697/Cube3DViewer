@@ -32,24 +32,24 @@ void FakePoseGenerator::run()
 
 void FakePoseGenerator::poseFromGenerator()
 {
-    mPos[0] = 0;
-    mPos[1] = 0;
-    mPos[2] = 0;
-    mRot[0] = 0;
-    mRot[1] = 0;
-    mRot[2] = 0;
+    mPos[0] = 0.0f;
+    mPos[1] = 0.0f;
+    mPos[2] = 0.0f;
+    mRot[0] = 0.0f;
+    mRot[1] = 0.0f;
+    mRot[2] = 0.0f;
 
     for (int i = 0; i < 50; i++)
     {
         if (mPos[2] <= 10.0f) // z axis
-            mPos[2] += 0.3;
+            mPos[2] += 0.3f;
         usleep(1000 * 100);
     }
 
     for (int i = 0; i < 100; i++)
     {
         if (mRot[1] <= 175.0f) // y axis
-            mRot[1] += 2.5;
+            mRot[1] += 2.5f;
         usleep(1000 * 100);
     }
 }
@@ -60,7 +60,7 @@ void FakePoseGenerator::poseFromFile(const char *filename)
     int ret;
     float pos[3];
     float rot[3];
-    float scale = 100.0;
+    float scale = 100.0f;
 
     fp = fopen(filename, "r");
     while (1)
