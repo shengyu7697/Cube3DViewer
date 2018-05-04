@@ -56,7 +56,6 @@ void FakePoseGenerator::poseFromGenerator()
 
 void FakePoseGenerator::poseFromFile(const char *filename)
 {
-    char buf[512];
     FILE *fp = NULL;
     int ret;
     float pos[3];
