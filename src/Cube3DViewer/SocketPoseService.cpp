@@ -60,6 +60,8 @@ void SocketPoseService::onRecv(int session, const char *buf, int len)
         mRot[0] = pose.euler_x();
         mRot[1] = pose.euler_y();
         mRot[2] = pose.euler_z();
+    } else {
+        printf("Error: ParseFromString failed\n");
     }
 #else
     float pos[3], euler[3];
