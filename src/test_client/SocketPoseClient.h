@@ -14,6 +14,7 @@ public:
 	~SocketPoseClient();
 
 	void sendPose(float pos[3], float euler[3], bool cv2gl = false);
+	bool isConnect();
 
 private:
 	void onConnect(int session);
@@ -26,6 +27,8 @@ private:
 	OnConnect onConnectCB = nullptr;
 	OnDisconnect onDisconnectCB = nullptr;
 	OnRecv onRecvCB = nullptr;
+
+	bool mIsConnect = false;
 };
 
 #endif // SOCKETPOSECLIENT_H

@@ -10,8 +10,18 @@ using namespace std;
 void sendPoseFromFakePoseGenerator()
 {
 	SocketPoseClient spc;
-	float pos[3] = {0.0f, 0.0f, 2.0f};
-	float rot[3] = {0.0f, 0.0f, 0.0f};
+
+	while(1) {
+		if (spc.isConnect())
+			break;
+		else
+			usleep(1000*10);
+	}
+
+	// float pos[3] = {0.0f, 0.0f, 2.0f}; FIXME can't ParseFromString via protobuf 2.6.1
+	// float rot[3] = {0.0f, 0.0f, 0.0f};
+	float pos[3] = {0.01f, 0.01f, 2.0f};
+	float rot[3] = {0.01f, 0.01f, 0.01f};
 
 	for (int i = 0; i < 20; i++) {
 		pos[2] += 0.3f;
@@ -23,6 +33,13 @@ void sendPoseFromFakePoseGenerator()
 void sendPoseFromFile(const char *filename)
 {
 	SocketPoseClient spc;
+
+	while(1) {
+		if (spc.isConnect())
+			break;
+		else
+			usleep(1000*10);
+	}
 
 	char buf[128];
 	FILE *fp = NULL;

@@ -46,6 +46,7 @@ void SocketPoseClient::sendPose(float pos[3], float euler[3], bool cv2gl)
 		pos[1] = pos[1] * scale;
 		pos[2] = pos[2] * scale;
 	}
+	printf("%f, %f, %f, %f, %f, %f\n", pos[0], pos[1], pos[2], euler[0], euler[1], euler[2]);
 
 #if defined(USE_PROTOBUF)
     Pose pose;
@@ -72,11 +73,13 @@ void SocketPoseClient::sendPose(float pos[3], float euler[3], bool cv2gl)
 
 void SocketPoseClient::onConnect(int session)
 {
+	mIsConnect = true;
 	printf("onConnect\n");
 }
 
 void SocketPoseClient::onDisconnect(int session)
 {
+	mIsConnect = false;
 	printf("onDisconnect\n");
 }
 
@@ -84,4 +87,9 @@ void SocketPoseClient::onRecv(int session, const char *buf, int len)
 {
 	//printf("session=%d, len=%d, buf=%s\n", session, len, buf);
 	printf("Server: %s\n", buf);
+}
+
+bool SocketPoseClient::isConnect()
+{
+	return mIsConnect;
 }
