@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string.h>
-#include <unistd.h>
 #include "SocketPoseClient.h"
+#include "TimeUtil.h"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ void sendPoseFromFakePoseGenerator()
 		if (spc.isConnect())
 			break;
 		else
-			usleep(1000*10);
+			sleep_ms(10);
 	}
 
 	// float pos[3] = {0.0f, 0.0f, 2.0f}; FIXME can't ParseFromString via protobuf 2.6.1
@@ -26,7 +26,7 @@ void sendPoseFromFakePoseGenerator()
 	for (int i = 0; i < 20; i++) {
 		pos[2] += 0.3f;
 		spc.sendPose(pos, rot);
-		usleep(1000*100);
+		sleep_ms(100);
 	}
 }
 
@@ -38,7 +38,7 @@ void sendPoseFromFile(const char *filename)
 		if (spc.isConnect())
 			break;
 		else
-			usleep(1000*10);
+			sleep_ms(10);
 	}
 
 	char buf[128];
@@ -59,7 +59,7 @@ void sendPoseFromFile(const char *filename)
 			break;
 
 		spc.sendPose(pos, rot, true);
-		usleep(1000*50);
+		sleep_ms(50);
 	}
 
 	if (fp != NULL)
