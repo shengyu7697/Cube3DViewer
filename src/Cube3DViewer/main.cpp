@@ -91,8 +91,25 @@ static void keyCallback(GLFWwindow* window, int key, int scancode, int action, i
         printf("space\n");
 }
 
+void printInfo()
+{
+#if defined(USE_NETWORK_SOCKET)
+    printf("USE_NETWORK_SOCKET: true\n");
+#else
+    printf("USE_NETWORK_SOCKET: false\n");
+#endif
+#if defined(USE_PROTOBUF)
+    printf("USE_PROTOBUF: true\n");
+#else
+    printf("USE_PROTOBUF: false\n");
+#endif
+}
+
 int main(int argc, const char *argv[])
 {
+    // print info
+    printInfo();
+
     // Initialize GLFW
     if (!glfwInit())
         exit(EXIT_FAILURE);
