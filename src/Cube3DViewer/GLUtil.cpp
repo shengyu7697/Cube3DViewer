@@ -1,7 +1,5 @@
 #include "GLUtil.h"
 
-#include <GL/glew.h>
-
 namespace GLUtil {
 
 /* Cube Color Define

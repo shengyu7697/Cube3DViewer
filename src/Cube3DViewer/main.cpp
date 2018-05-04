@@ -1,14 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include "linmath.h"
-#include "GLUtil.h"
 #if defined(USE_NETWORK_SOCKET)
 #include "SocketPoseService.h"
 #else
 #include "FakePoseGenerator.h"
 #endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <GLFW/glfw3.h>
+#include "linmath.h"
+#include "GLUtil.h"
 
 float pos[3] = {0.0, 0.0, 0.0};
 float rot[3] = {0.0, 0.0, 0.0};

@@ -22,7 +22,14 @@ if(USE_PROTOBUF)
     list(APPEND LIBRARIES ${PROTOBUF_LIBRARIES})
 endif()
 
+if (WIN32)
+    list(APPEND OPENGL_LIBRARIES opengl32)
+else() # Linux
+	list(APPEND OPENGL_LIBRARIES GL GLEW)
+	list(APPEND LIBRARIES pthread)
+endif()
+
 add_executable(cube3dviewer ${FILES})
 
-target_include_directories(cube3dviewer PUBLIC ${INCLUDE_DIRS})
-target_link_libraries(cube3dviewer GL GLEW glfw pthread ${LIBRARIES})
+target_include_directories(cube3dviewer PUBLIC ${INCLUDE_DIRS} "./deps")
+target_link_libraries(cube3dviewer glfw ${LIBRARIES} ${OPENGL_LIBRARIES})
