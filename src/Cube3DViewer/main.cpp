@@ -6,9 +6,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "GLUtil.h"
 #include <GLFW/glfw3.h>
 #include "linmath.h"
-#include "GLUtil.h"
 
 float pos[3] = {0.0, 0.0, 0.0};
 float rot[3] = {0.0, 0.0, 0.0};
