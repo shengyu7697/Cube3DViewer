@@ -25,8 +25,8 @@ endif()
 if (WIN32)
     list(APPEND OPENGL_LIBRARIES opengl32)
 else() # Linux
-	list(APPEND OPENGL_LIBRARIES GL GLEW)
-	list(APPEND LIBRARIES pthread)
+    list(APPEND OPENGL_LIBRARIES GL GLEW)
+    list(APPEND LIBRARIES pthread)
 endif()
 
 add_executable(cube3dviewer ${FILES})

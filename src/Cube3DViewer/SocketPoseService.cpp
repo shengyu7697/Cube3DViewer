@@ -47,7 +47,7 @@ void SocketPoseService::onDisconnect(int session)
 
 void SocketPoseService::onRecv(int session, const char *buf, int len)
 {
-//	printf("session=%d, len=%d, buf=%s\n", session, len, buf);
+//    printf("session=%d, len=%d, buf=%s\n", session, len, buf);
 #if defined(USE_PROTOBUF)
     Pose pose;
     const string data(buf);

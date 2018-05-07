@@ -16,7 +16,7 @@ endif()
 
 if (WIN32)
 else() # Linux
-	list(APPEND LIBRARIES pthread)
+    list(APPEND LIBRARIES pthread)
 endif()
 
 add_executable(test_client ${FILES})

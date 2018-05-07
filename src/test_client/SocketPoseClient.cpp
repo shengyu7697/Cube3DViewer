@@ -9,44 +9,44 @@ using namespace vr;
 
 SocketPoseClient::SocketPoseClient() 
 {
-	const std::string hostname = "127.0.0.1";
-	int port = 7000;
-	printf("start client, connect to %s:%d\n", hostname.c_str(), port);
+    const std::string hostname = "127.0.0.1";
+    int port = 7000;
+    printf("start client, connect to %s:%d\n", hostname.c_str(), port);
 
-	onConnectCB = std::bind(&SocketPoseClient::onConnect, this, std::placeholders::_1);
-	mTcpClient.setOnConnect(onConnectCB);
-	onDisconnectCB = std::bind(&SocketPoseClient::onDisconnect, this, std::placeholders::_1);
-	mTcpClient.setOnDisconnect(onDisconnectCB);
-	onRecvCB = std::bind(&SocketPoseClient::onRecv, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-	mTcpClient.setOnRecv(onRecvCB);
-	mTcpClient.start(hostname, 7000);
+    onConnectCB = std::bind(&SocketPoseClient::onConnect, this, std::placeholders::_1);
+    mTcpClient.setOnConnect(onConnectCB);
+    onDisconnectCB = std::bind(&SocketPoseClient::onDisconnect, this, std::placeholders::_1);
+    mTcpClient.setOnDisconnect(onDisconnectCB);
+    onRecvCB = std::bind(&SocketPoseClient::onRecv, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    mTcpClient.setOnRecv(onRecvCB);
+    mTcpClient.start(hostname, 7000);
 }
 
 SocketPoseClient::~SocketPoseClient() 
 {
-	mTcpClient.stop();
+    mTcpClient.stop();
 }
 
 inline void opencv2opengl(float pos[3], float euler[3])
 {
-	pos[0] = -pos[0];
-	pos[1] = -pos[1];
-	//pos[2] = pos[2];
-	euler[0] = -euler[0];
-	euler[1] = -euler[1];
-	euler[2] = -euler[2];
+    pos[0] = -pos[0];
+    pos[1] = -pos[1];
+    //pos[2] = pos[2];
+    euler[0] = -euler[0];
+    euler[1] = -euler[1];
+    euler[2] = -euler[2];
 }
 
 void SocketPoseClient::sendPose(float pos[3], float euler[3], bool cv2gl)
 {
-	if (cv2gl) {
-		float scale = 100.0f;
-		opencv2opengl(pos, euler);
-		pos[0] = pos[0] * scale;
-		pos[1] = pos[1] * scale;
-		pos[2] = pos[2] * scale;
-	}
-	printf("%f, %f, %f, %f, %f, %f\n", pos[0], pos[1], pos[2], euler[0], euler[1], euler[2]);
+    if (cv2gl) {
+        float scale = 100.0f;
+        opencv2opengl(pos, euler);
+        pos[0] = pos[0] * scale;
+        pos[1] = pos[1] * scale;
+        pos[2] = pos[2] * scale;
+    }
+    printf("%f, %f, %f, %f, %f, %f\n", pos[0], pos[1], pos[2], euler[0], euler[1], euler[2]);
 
 #if defined(USE_PROTOBUF)
     Pose pose;
@@ -65,31 +65,31 @@ void SocketPoseClient::sendPose(float pos[3], float euler[3], bool cv2gl)
     pose.SerializeToArray(buf, sizeof(buf));
     mTcpClient.send(buf, strlen(buf));*/
 #else
-	char buf[64];
-	sprintf(buf, "%f, %f, %f, %f, %f, %f", pos[0], pos[1], pos[2], euler[0], euler[1], euler[2]);
-	mTcpClient.send(buf, (int)strlen(buf));
+    char buf[64];
+    sprintf(buf, "%f, %f, %f, %f, %f, %f", pos[0], pos[1], pos[2], euler[0], euler[1], euler[2]);
+    mTcpClient.send(buf, (int)strlen(buf));
 #endif
 }
 
 void SocketPoseClient::onConnect(int session)
 {
-	mIsConnect = true;
-	printf("onConnect\n");
+    mIsConnect = true;
+    printf("onConnect\n");
 }
 
 void SocketPoseClient::onDisconnect(int session)
 {
-	mIsConnect = false;
-	printf("onDisconnect\n");
+    mIsConnect = false;
+    printf("onDisconnect\n");
 }
 
 void SocketPoseClient::onRecv(int session, const char *buf, int len)
 {
-	//printf("session=%d, len=%d, buf=%s\n", session, len, buf);
-	printf("Server: %s\n", buf);
+    //printf("session=%d, len=%d, buf=%s\n", session, len, buf);
+    printf("Server: %s\n", buf);
 }
 
 bool SocketPoseClient::isConnect()
 {
-	return mIsConnect;
+    return mIsConnect;
 }

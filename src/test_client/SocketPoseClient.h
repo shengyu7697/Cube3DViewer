@@ -10,25 +10,25 @@ class SocketPoseClient
     typedef std::function<void(int session)> OnDisconnect;
     typedef std::function<void(int session, const char *buf, int len)> OnRecv;
 public:
-	SocketPoseClient();
-	~SocketPoseClient();
+    SocketPoseClient();
+    ~SocketPoseClient();
 
-	void sendPose(float pos[3], float euler[3], bool cv2gl = false);
-	bool isConnect();
+    void sendPose(float pos[3], float euler[3], bool cv2gl = false);
+    bool isConnect();
 
 private:
-	void onConnect(int session);
-	void onDisconnect(int session);
-	void onRecv(int session, const char *buf, int len);
+    void onConnect(int session);
+    void onDisconnect(int session);
+    void onRecv(int session, const char *buf, int len);
 
-	float mPos[3] = {0.0f, 0.0f, 0.0f};
-	TinyTcpClient mTcpClient;
+    float mPos[3] = {0.0f, 0.0f, 0.0f};
+    TinyTcpClient mTcpClient;
 
-	OnConnect onConnectCB = nullptr;
-	OnDisconnect onDisconnectCB = nullptr;
-	OnRecv onRecvCB = nullptr;
+    OnConnect onConnectCB = nullptr;
+    OnDisconnect onDisconnectCB = nullptr;
+    OnRecv onRecvCB = nullptr;
 
-	bool mIsConnect = false;
+    bool mIsConnect = false;
 };
 
 #endif // SOCKETPOSECLIENT_H

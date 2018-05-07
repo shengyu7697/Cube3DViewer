@@ -10,8 +10,8 @@
 #endif
 
 namespace GLUtil {
-	void drawCube();
-	void drawAxis(float len);
+    void drawCube();
+    void drawAxis(float len);
 }
 
 #endif // GLUTIL_H
