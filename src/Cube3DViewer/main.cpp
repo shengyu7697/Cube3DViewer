@@ -1,3 +1,4 @@
+#include "Config.h"
 #if defined(USE_NETWORK_SOCKET)
 #include "SocketPoseService.h"
 #else

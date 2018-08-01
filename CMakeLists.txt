@@ -6,7 +6,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 option(USE_NETWORK_SOCKET "use network socket?" OFF)
 if(USE_NETWORK_SOCKET)
-    add_definitions("-DUSE_NETWORK_SOCKET")
     option(USE_PROTOBUF "use protobuf?" OFF)
     if(USE_PROTOBUF)
         add_definitions("-DUSE_PROTOBUF")

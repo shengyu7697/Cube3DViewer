@@ -1,9 +1,12 @@
 find_package(glfw3 REQUIRED)
 
+configure_file(Config.h.in Config.h @ONLY)
+
 set(FILES
     main.cpp
     GLUtil.h
     GLUtil.cpp
+    Config.h
 )
 
 if(USE_NETWORK_SOCKET)

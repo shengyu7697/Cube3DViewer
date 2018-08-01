@@ -15,3 +15,5 @@ Makefile
 # protobuf
 *.pb.cc
 *.pb.h
+
+Config.h
